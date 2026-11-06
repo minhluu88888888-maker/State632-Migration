@@ -23,6 +23,12 @@
             line-height: 1.6;
         }
 
+        /* Support Right-to-Left styling for Arabic dynamically */
+        body.rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
         header {
             background: linear-gradient(180deg, rgba(15, 17, 21, 0.4) 0%, rgba(15, 17, 21, 0.95) 80%, rgba(15, 17, 21, 1) 100%), 
                         url('background.png') no-repeat center center;
@@ -40,8 +46,10 @@
             transform: translateX(-50%);
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 10px;
             z-index: 10;
+            flex-wrap: wrap;
+            width: 90%;
         }
 
         .lang-btn {
@@ -53,6 +61,7 @@
             cursor: pointer;
             transition: all 0.3s;
             backdrop-filter: blur(4px);
+            font-size: 0.9rem;
         }
 
         .lang-btn.active, .lang-btn:hover {
@@ -114,6 +123,11 @@
             padding-left: 20px;
         }
 
+        body.rtl ul {
+            padding-left: 0;
+            padding-right: 20px;
+        }
+
         li {
             margin-bottom: 10px;
         }
@@ -149,8 +163,8 @@
             border-top: 1px solid var(--border-color);
         }
 
-        /* Initial hidden states for alternative languages */
-        .lang-group[data-lang="zh"], .lang-group[data-lang="ko"] {
+        /* Initial display settings handled explicitly via JavaScript */
+        .lang-group {
             display: none;
         }
     </style>
@@ -162,6 +176,7 @@
             <button class="lang-btn active" onclick="setLanguage('en', event)">English</button>
             <button class="lang-btn" onclick="setLanguage('zh', event)">繁中</button>
             <button class="lang-btn" onclick="setLanguage('ko', event)">한국어</button>
+            <button class="lang-btn" onclick="setLanguage('ar', event)">العربية</button>
         </div>
         <div class="logo-text">Dark War: Survival</div>
         
@@ -181,6 +196,12 @@
         <div class="lang-group" data-lang="ko">
             <h1>State 632 이주 신청</h1>
             <p class="subtitle">전장을 지배할 최정예 부대의 일원이 되십시오</p>
+        </div>
+
+        <!-- Arabic Header -->
+        <div class="lang-group" data-lang="ar">
+            <h1>هجرة الولاية 632</h1>
+            <p class="subtitle">انضم إلى القوات النخبة التكتيكية في ساحة المعركة</p>
         </div>
     </header>
 
@@ -255,18 +276,3 @@
             </div>
 
             <div class="card">
-                <h2>작전 사령부 프로필</h2>
-                <p>State 632는 통합된 규율 아래 움직입니다. 연맹 간 협력 계획, 동기화된 타임 윈도우, Discord를 통한 철저한 오더 체계를 유지합니다. 적극적이면서도 일사분란한 환경을 찾으신다면 지금 즉시 합류하십시오.</p>
-            </div>
-
-            <div class="card">
-                <h2>이주 자격 요건</h2>
-                <ul>
-                    <li>주요 전역 동원령 선포 시 일일 작전 참여 가능자.</li>
-                    <li>전술 트래킹 시스템 가입 및 사령부 지시 사항 준수 가능자.</li>
-                    <li>성장에 집중하고 고티어 병력을 효율적으로 운용할 사령관 대환영.</li>
-                </ul>
-                <a href="https://discord.gg" class="cta-btn" target="_blank">이주 신청하기</a>
-            </div>
-        </div>
-
