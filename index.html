@@ -7,7 +7,7 @@
     <style>
         :root {
             --bg-color: #0f1115;
-            --card-bg: #1a1d24;
+            --card-bg: rgba(26, 29, 36, 0.9);
             --accent-color: #ff4a4a;
             --text-color: #e2e8f0;
             --text-muted: #94a3b8;
@@ -24,38 +24,47 @@
         }
 
         header {
-            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(15,17,21,1) 100%);
-            padding: 40px 20px;
+            background: linear-gradient(180deg, rgba(15, 17, 21, 0.4) 0%, rgba(15, 17, 21, 0.95) 80%, rgba(15, 17, 21, 1) 100%), 
+                        url('background.png') no-repeat center center;
+            background-size: cover;
+            padding: 120px 20px 60px 20px;
             text-align: center;
             border-bottom: 2px solid var(--accent-color);
+            position: relative;
         }
 
         .lang-switcher {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 20px;
+            z-index: 10;
         }
 
         .lang-btn {
-            background: transparent;
+            background: rgba(15, 17, 21, 0.75);
             border: 1px solid var(--border-color);
             color: var(--text-muted);
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.3s;
+            backdrop-filter: blur(4px);
         }
 
         .lang-btn.active, .lang-btn:hover {
             border-color: var(--accent-color);
             color: var(--accent-color);
+            background: rgba(255, 74, 74, 0.1);
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 20px 20px 40px 20px;
         }
 
         .logo-text {
@@ -65,18 +74,22 @@
             color: var(--accent-color);
             font-weight: bold;
             margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin: 10px 0;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.9);
         }
 
         .subtitle {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-bottom: 30px;
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            font-weight: 500;
         }
 
         .card {
@@ -84,8 +97,9 @@
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
         }
 
         h2 {
@@ -118,12 +132,13 @@
             letter-spacing: 1px;
             border-radius: 4px;
             text-decoration: none;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.2s;
             box-shadow: 0 4px 15px rgba(255, 74, 74, 0.4);
         }
 
         .cta-btn:hover {
             background-color: #e03e3e;
+            transform: translateY(-2px);
         }
 
         footer {
@@ -134,8 +149,8 @@
             border-top: 1px solid var(--border-color);
         }
 
-        /* Language visibility targeting */
-        [lang="zh"], [lang="ko"] {
+        /* Initial hidden states for alternative languages */
+        .lang-group[data-lang="zh"], .lang-group[data-lang="ko"] {
             display: none;
         }
     </style>
@@ -150,129 +165,108 @@
         </div>
         <div class="logo-text">Dark War: Survival</div>
         
-        <!-- English Heading -->
+        <!-- English Header -->
         <div class="lang-group" data-lang="en">
             <h1>STATE 632 MIGRATION</h1>
-            <p class="subtitle">Secure your drop-in spot with the server's elite forces</p>
+            <p class="subtitle">Join forces with the warzone's elite tactical vanguard</p>
         </div>
         
-        <!-- Traditional Chinese Heading -->
+        <!-- Traditional Chinese Header -->
         <div class="lang-group" data-lang="zh">
             <h1>State 632 移民大廳</h1>
-            <p class="subtitle">與伺服器頂尖精英並肩作戰，立即申請</p>
+            <p class="subtitle">與最強戰區精英並肩作戰，主宰戰局</p>
         </div>
 
-        <!-- Korean Heading -->
+        <!-- Korean Header -->
         <div class="lang-group" data-lang="ko">
             <h1>State 632 이주 신청</h1>
-            <p class="subtitle">서버 엘리트 연맹과 함께 전장을 지배하십시오</p>
+            <p class="subtitle">전장을 지배할 최정예 부대의 일원이 되십시오</p>
         </div>
     </header>
 
     <div class="container">
         
-        <!-- ENGLISH CONTENT -->
+        <!-- ENGLISH SECTION -->
         <div class="lang-group" data-lang="en">
             <div class="card">
                 <h2>Why Migrate to State 632?</h2>
-                <p>Welcome to a highly coordinated, strategically dominant ecosystem built for absolute survival. State 632 offers an optimized battle environment driven by active alliances, structured rally compositions, and veteran fighter/shooter leads.</p>
+                <p>Welcome to a highly coordinated tactical zone optimized for long-term competition and server health. State 632 features dedicated combat leads focusing on high-tier optimization, strategic battlefield rotation, and massive war rewards.</p>
                 <ul>
-                    <li><strong>Unified Power Structure:</strong> Balanced rotation, strategic internal management, and zero unnecessary civilian drama.</li>
-                    <li><strong>Elite Combat Protocols:</strong> Organized warfare groups leveraging precision stagger tactics and optimized rally locks.</li>
-                    <li><strong>Rapid Growth Ecosystem:</strong> Shared resource planning, coordinated high-level rallies, and active event participation to maximize your rewards.</li>
+                    <li><strong>Strategic Stability:</strong> Streamlined server rotation rules to eliminate civil friction and protect growing shelters.</li>
+                    <li><strong>Elite Combat Metas:</strong> Coordinated battle lines focusing on fully maximized fighter and shooter troop specializations.</li>
+                    <li><strong>High-Velocity Progression:</strong> Seamlessly structured top-tier rallies designed to maximize your daily resource yields.</li>
                 </ul>
             </div>
 
             <div class="card">
-                <h2>State Command Profile</h2>
-                <p>The premier powerhouses driving State 632 forward focus on heavy fighter/shooter troop types, synchronized tactical executions, and continuous competitive progression. Join a war zone that doesn't just play the war—we control it.</p>
+                <h2>Warzone Operations Profile</h2>
+                <p>State 632 operates on unified military discipline. We utilize advanced cross-alliance planning, coordinated timing windows, and strict tactical callouts on Discord. If you are an active combatant looking for an aggressive yet orderly home, your drop spot is ready.</p>
             </div>
 
             <div class="card">
-                <h2>Migration Requirements</h2>
+                <h2>Migration Entry Criteria</h2>
                 <ul>
-                    <li>Active daily participation in State and Alliance war efforts.</li>
-                    <li>Ability to coordinate and follow tactical rally protocols on Discord.</li>
-                    <li>Open to all competitive Shell levels and power tiers looking for a stable, thriving home.</li>
+                    <li>Active daily attendance during crucial state mobilization windows.</li>
+                    <li>Ability to join or follow tactical tracking networks and Discord directives.</li>
+                    <li>Open to growth-focused commanders ready to deploy high-tier assets efficiently.</li>
                 </ul>
                 <a href="https://discord.gg" class="cta-btn" target="_blank">Apply for Migration</a>
             </div>
         </div>
 
-        <!-- TRADITIONAL CHINESE CONTENT -->
+        <!-- TRADITIONAL CHINESE SECTION -->
         <div class="lang-group" data-lang="zh">
             <div class="card">
                 <h2>為什麼選擇移民 State 632？</h2>
-                <p>歡迎來到為了絕對生存而打造的高效、策略性頂尖生態系。State 632 擁有由活躍連盟、嚴密集結編隊以及資深步兵/槍兵流派指揮官所引領的優化戰鬥環境。</p>
+                <p>歡迎來到專為長期競爭力與健康生態打造的高效戰術特區。State 632 擁有頂尖的戰事指揮、透明的資源輪替規範，以及最大化的跨服戰役獎勵分配。</p>
                 <ul>
-                    <li><strong>統一的強大體系：</strong> 平衡的資源輪替、完善的內部管理，杜絕無意義的內耗。</li>
-                    <li><strong>精英戰術協定：</strong> 組織化的作戰小組，利用精準的時間差交錯推進與集結鎖定。</li>
-                    <li><strong>快速發育生態圈：</strong> 資源共享規劃、高難度集結無縫接軌，以及極高的活動參與率，確保獎勵拿滿。</li>
+                    <li><strong>戰略穩定性：</strong> 明確的內部協定，全面杜絕無意義內耗，全力保護發育期避難所。</li>
+                    <li><strong>精英兵種編隊：</strong> 專注於極致化戰士與射手流派，提供最精準的時間差集結與戰術推進。</li>
+                    <li><strong>高效發育進度：</strong> 每日定時對接高階巨獸與活動集結，助你輕鬆實現資源最大化。</li>
                 </ul>
             </div>
 
             <div class="card">
-                <h2>戰區核心檔案</h2>
-                <p>引領 State 632 命運的核心強權深耕於高階戰士與射手部隊，強調高度同步的戰術執行與不間斷的競爭跨步。加入我們，不只是參與戰爭，而是主宰戰局。</p>
+                <h2>戰區核心方針</h2>
+                <p>State 632 秉持高度紀律。我們擁有跨聯盟聯合作戰編制、精準的時間管理，以及完善的 Discord 戰術群組。如果你是在尋找一個強大且秩序井然的歸宿，這裡就是你的終點站。</p>
             </div>
 
             <div class="card">
-                <h2>移民條件</h2>
+                <h2>移民限制與規範</h2>
                 <ul>
-                    <li>每日積極參與戰區與聯盟的戰事推進。</li>
-                    <li>能配合加入 Discord 語音或文字頻道執行戰術集結。</li>
-                    <li>歡迎所有追求穩定、繁榮環境的各級避難所高玩與潛力新星。</li>
+                    <li>每日能於關鍵戰略動員期間保持線上活躍。</li>
+                    <li>願意配合加入戰術追蹤管理並遵循語音指揮。</li>
+                    <li>歡迎所有希望穩定提升兵力與科技的各階指揮官。</li>
                 </ul>
                 <a href="https://discord.gg" class="cta-btn" target="_blank">提交移民申請單</a>
             </div>
         </div>
 
-        <!-- KOREAN CONTENT -->
+        <!-- KOREAN SECTION -->
         <div class="lang-group" data-lang="ko">
             <div class="card">
                 <h2>왜 State 632로 이주해야 하는가?</h2>
-                <p>절대적인 생존을 위해 구축된 고도로 조율되고 전략적으로 우세한 생태계에 오신 것을 환영합니다. State 632는 활발한 연맹, 구조화된 랠리 조합, 베테랑 전투원/슈터 리드가 주도하는 최적화된 전투 환경을 제공합니다.</p>
+                <p>장기적인 경쟁력과 전장 성장에 최적화된 고도로 조율된 전술 구역에 오신 것을 환영합니다. State 632는 최고 수준의 최적화, 전략적인 공방 교대 및 압도적인 전쟁 보상을 제공합니다.</p>
                 <ul>
-                    <li><strong>통합된 권력 구조:</strong> 균형 잡힌 로테이션, 전략적인 내부 관리 및 불필요한 내분 제로.</li>
-                    <li><strong>최정예 전투 프로토콜:</strong> 정밀한 시차 공격 전술과 최적화된 랠리 잠금을 활용하는 조직적인 전쟁 그룹.</li>
-                    <li><strong>고속 성장 생태계:</strong> 보상을 극대화하기 위한 자원 계획 공유, 조정된 고레벨 랠리 및 적극적인 이벤트 참여.</li>
+                    <li><strong>전략적 안정성:</strong> 불필요한 분쟁을 배제하고 성장 중인 대피소를 보호하기 위한 조율된 서버 규칙 적용.</li>
+                    <li><strong>정예 전투 메타:</strong> 극대화된 파이터 및 슈터 특성화를 중심으로 구성된 조직적인 전투 연맹 구조.</li>
+                    <li><strong>고속 성장 프로세스:</strong> 일일 자원 획득을 한계치까지 끌어올리기 위해 체계화된 고레벨 연합 랠리 운영.</li>
                 </ul>
             </div>
 
             <div class="card">
-                <h2>주요 연맹 프로필</h2>
-                <p>State 632를 이끄는 최고의 핵심 세력들입니다. 저희는 강력한 파이터/슈터 부대 유형, 동기화된 전술 집행, 지속적인 경쟁 성장에 집중합니다. 단순히 전쟁을 플레이하는 것이 아니라 통제하는 일원에 합류하십시오.</p>
+                <h2>작전 사령부 프로필</h2>
+                <p>State 632는 통합된 규율 아래 움직입니다. 연맹 간 협력 계획, 동기화된 타임 윈도우, Discord를 통한 철저한 오더 체계를 유지합니다. 적극적이면서도 일사분란한 환경을 찾으신다면 지금 즉시 합류하십시오.</p>
             </div>
 
             <div class="card">
-                <h2>이주 요구 사항</h2>
+                <h2>이주 자격 요건</h2>
                 <ul>
-                    <li>국가 및 연맹 전쟁 부문에 매일 적극적으로 참여.</li>
-                    <li>Discord에서 전술 랠리 프로토콜을 조율하고 따를 수 있는 능력.</li>
-                    <li>안정적이고 번창하는 보금자리를 찾는 모든 경쟁력 있는 쉘(Shelter) 레벨 및 투력 유저 환영.</li>
+                    <li>주요 전역 동원령 선포 시 일일 작전 참여 가능자.</li>
+                    <li>전술 트래킹 시스템 가입 및 사령부 지시 사항 준수 가능자.</li>
+                    <li>성장에 집중하고 고티어 병력을 효율적으로 운용할 사령관 대환영.</li>
                 </ul>
                 <a href="https://discord.gg" class="cta-btn" target="_blank">이주 신청하기</a>
             </div>
         </div>
 
-    </div>
-
-    <footer>
-        <p>&copy; 2026 State 632 Administration. All Rights Reserved. Designed for Dark War Commanders.</p>
-    </footer>
-
-    <script>
-        function setLanguage(lang, event) {
-            if (event) {
-                document.querySelectorAll('.lang-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                event.target.classList.add('active');
-            }
-
-            document.querySelectorAll('.lang-group').forEach(el => {
-                if (el.getAttribute('data-lang') === lang) {
-                    el.style.display = 'block';
-                } else {
-                    el.style.display = 'none';
-                }
