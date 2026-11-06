@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoCh Alliance Migration | State 632</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --accent-color: #ff4757;
+            --text-color: #ffffff;
+            --muted-text: #a4b0be;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+        }
+
+        .lang-switcher a {
+            color: var(--muted-text);
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .lang-switcher a:hover, .lang-switcher a.active {
+            color: var(--text-color);
+            font-weight: bold;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--muted-text);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 71, 87, 0.6);
+        }
+
+        .info-section {
+            max-width: 800px;
+            width: 90%;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 50px;
+            box-sizing: border-box;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .info-section h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .info-section ul {
+            padding-left: 20px;
+            color: var(--muted-text);
+            line-height: 1.8;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            color: #57606f;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">LoCh ALLIANCE</div>
+        <div class="lang-switcher">
+            <a id="lang-en" class="active" onclick="switchLanguage('en')">English</a>
+            <a id="lang-zh" onclick="switchLanguage('zh')">繁中</a>
+            <a id="lang-ko" onclick="switchLanguage('ko')">한국어</a>
+        </div>
+    </header>
+
+    <main class="hero">
+        <h1 id="main-title">State 632 <span>Migration Portal</span></h1>
+        <p id="main-desc">Commanders, tactical deployment coordinates are set. Register your power metrics and secure your tier approvals for the official migration window into State 632.</p>
+        
+        <a href="https://google.com" target="_blank" class="cta-btn" id="cta-text">Register Application</a>
+    </main>
+
+    <section class="info-section">
+        <h2 id="list-title">⚠️ Critical Pre-Flight Checklist</h2>
+        <ul id="list-items">
+            <li><strong>Headquarters Level:</strong> Must be level 21 or higher.</li>
+            <li><strong>Queue State:</strong> All march queues, building queues, and tech queues must be entirely idle.</li>
+            <li><strong>Passports Required:</strong> Ensure you possess the necessary volume of Migration Passes relative to your Combat Power ranking.</li>
+            <li><strong>Leadership:</strong> You cannot be the active Supreme Commander/State President at the moment of migration.</li>
+        </ul>
+    </section>
+
+    <footer id="footer-text">
+        &copy; 2026 LoCh Alliance. For internal tactical deployment only. Powered by Dark War: Survival communities.
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                title: 'State 632 <span>Migration Portal</span>',
+                desc: 'Commanders, tactical deployment coordinates are set. Register your power metrics and secure your tier approvals for the official migration window into State 632.',
+                cta: 'Register Application',
+                listTitle: '⚠️ Critical Pre-Flight Checklist',
+                items: [
+                    '<strong>Headquarters Level:</strong> Must be level 21 or higher.',
+                    '<strong>Queue State:</strong> All march queues, building queues, and tech queues must be entirely idle.',
+                    '<strong>Passports Required:</strong> Ensure you possess the necessary volume of Migration Passes relative to your Combat Power ranking.',
+                    '<strong>Leadership:</strong> You cannot be the active Supreme Commander/State President at the moment of migration.'
+                ],
+                footer: '&copy; 2026 LoCh Alliance. For internal tactical deployment only. Powered by Dark War: Survival communities.'
+            },
+            zh: {
+                title: 'State 632 <span>移民申請總部</span>',
+                desc: '各位指揮官，戰術部署坐標已確認。請登記您的戰力數據並確保獲得對應評級批准，以便在官方開放窗口期順利遷往 632 區。',
+                cta: '填寫移民申請表',
+                listTitle: '⚠️ 遷移前關鍵核對清單',
+                items: [
+                    '<strong>總部等級：</strong> 必須達到 21 級或以上。',
+                    '<strong>隊列狀態：</strong> 所有行軍隊列、建造隊列和科技研發隊列必須完全處於空閒狀態。',
+                    '<strong>移民令要求：</strong> 請確保您擁有的移民令數量符合您的戰力排名需求。',
+                    '<strong>職位限制：</strong> 移民實施時，您不能擔任當前伺服器的最高指揮官/執政官。'
+                ],
+                footer: '&copy; 2026 LoCh 聯盟。僅供內部戰術部署使用。由 Dark War: Survival 社群支持。'
+            },
+            ko: {
+                title: 'State 632 <span>이전 신청 포털</span>',
+                desc: '지휘관 여러분, 전술 배치 좌표가 설정되었습니다. 632 주로의 공식 이전 창구 기간 동안 전력 지표를 등록하고 티어 승인을 확보하십시오.',
+                cta: '이전 신청서 등록',
+                listTitle: '⚠️ 이전 전 필수 체크리스트',
+                items: [
+                    '<strong>본부 레벨:</strong> 21 레벨 이상이어야 합니다.',
+                    '<strong>큐 상태:</strong> 모든 행군 큐, 건설 큐, 기술 연구 큐가 완전히 대기 상태여야 합니다.',
+                    '<strong>이전령 필요 수량:</strong> 귀하의 전투력 순위에 비례하여 필요한 대량의 이전령 카드를 보유하고 있는지 확인하십시오.',
+                    '<strong>리더십 제한:</strong> 이전하는 순간에 현재 주의 최고 지휘관/대통령 상태여서는 안 됩니다.'
+                ],
+                footer: '&copy; 2026 LoCh 연맹. 내부 전술 배치용. Dark War: Survival 커뮤니티 지원.'
+            }
+        };
+
+        function switchLanguage(lang) {
+            // Update Text Elements
+            document.getElementById('main-title').innerHTML = translations[lang].title;
+            document.getElementById('main-desc').innerText = translations[lang].desc;
+            document.getElementById('cta-text').innerText = translations[lang].cta;
+            document.getElementById('list-title').innerText = translations[lang].listTitle;
+            document.getElementById('footer-text').innerHTML = translations[lang].footer;
+
+            // Update List Items
+            const listContainer = document.getElementById('list-items');
+            listContainer.innerHTML = '';
+            translations[lang].items.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = item;
+                listContainer.appendChild(li);
+            });
+
+            // Toggle CSS classes for active language link styling
+            document.getElementById('lang-en').classList.remove('active');
+            document.getElementById('lang-zh').classList.remove('active');
+            document.getElementById('lang-ko').classList.remove('active');
+            document.getElementById(`lang-${lang}`).classList.add('active');
+        }
+    </script>
+</body>
+</html>
