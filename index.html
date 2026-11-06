@@ -3,276 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>State 632 Migration Application | Dark War: Survival</title>
+    <title>LoCh Alliance Migration | State 632</title>
     <style>
         :root {
-            --bg-color: #0f1115;
-            --card-bg: rgba(26, 29, 36, 0.9);
-            --accent-color: #ff4a4a;
-            --text-color: #e2e8f0;
-            --text-muted: #94a3b8;
-            --border-color: #2e3440;
+            --bg-color: #0a0b0e;
+            --card-bg: #12141c;
+            --accent-color: #ff4757;
+            --accent-hover: #ff6b81;
+            --text-color: #f1f2f6;
+            --muted-text: #a4b0be;
+            --border-color: #2f3542;
+            --glow-color: rgba(255, 71, 87, 0.25);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
             padding: 0;
-            line-height: 1.6;
-        }
-
-        /* Support Right-to-Left styling for Arabic dynamically */
-        body.rtl {
-            direction: rtl;
-            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 20%, #1e151b 0%, var(--bg-color) 60%);
         }
 
         header {
-            background: linear-gradient(180deg, rgba(15, 17, 21, 0.4) 0%, rgba(15, 17, 21, 0.95) 80%, rgba(15, 17, 21, 1) 100%), 
-                        url('background.png') no-repeat center center;
-            background-size: cover;
-            padding: 120px 20px 60px 20px;
-            text-align: center;
-            border-bottom: 2px solid var(--accent-color);
-            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 20px;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: #ffffff;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+            text-shadow: 0 0 15px var(--glow-color);
         }
 
         .lang-switcher {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            z-index: 10;
-            flex-wrap: wrap;
-            width: 90%;
+            gap: 8px;
+            background: var(--card-bg);
+            padding: 6px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
-        .lang-btn {
-            background: rgba(15, 17, 21, 0.75);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            padding: 6px 14px;
-            border-radius: 4px;
+        .lang-switcher a {
+            color: var(--muted-text);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
             cursor: pointer;
-            transition: all 0.3s;
-            backdrop-filter: blur(4px);
-            font-size: 0.9rem;
+            padding: 6px 14px;
+            border-radius: 20px;
         }
 
-        .lang-btn.active, .lang-btn:hover {
-            border-color: var(--accent-color);
+        .lang-switcher a:hover {
+            color: #ffffff;
+        }
+
+        .lang-switcher a.active {
+            color: #ffffff;
+            background-color: var(--accent-color);
+            box-shadow: 0 2px 10px var(--glow-color);
+        }
+
+        main {
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 40px 0 50px 0;
+            max-width: 750px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0 0 20px 0;
+            letter-spacing: -0.5px;
+            line-height: 1.15;
+        }
+
+        .hero h1 span {
+            display: block;
             color: var(--accent-color);
-            background: rgba(255, 74, 74, 0.1);
+            font-size: 3rem;
+            text-shadow: 0 0 20px var(--glow-color);
+            margin-top: 5px;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px 20px 40px 20px;
-        }
-
-        .logo-text {
+        .hero p {
             font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--accent-color);
-            font-weight: bold;
-            margin-bottom: 5px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-        }
-
-        h1 {
-            font-size: 2.8rem;
-            margin: 10px 0;
-            letter-spacing: 2px;
-            text-shadow: 0 4px 8px rgba(0,0,0,0.9);
-        }
-
-        .subtitle {
-            color: #fff;
-            font-size: 1.2rem;
-            margin-bottom: 0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-            font-weight: 500;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px);
-        }
-
-        h2 {
-            color: var(--accent-color);
-            font-size: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
-
-        ul {
-            padding-left: 20px;
-        }
-
-        body.rtl ul {
-            padding-left: 0;
-            padding-right: 20px;
-        }
-
-        li {
-            margin-bottom: 10px;
+            color: var(--muted-text);
+            margin-bottom: 40px;
+            line-height: 1.65;
         }
 
         .cta-btn {
-            display: block;
-            width: 100%;
-            max-width: 300px;
-            margin: 30px auto 0 auto;
+            display: inline-block;
             background-color: var(--accent-color);
             color: white;
-            text-align: center;
-            padding: 15px 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 4px;
+            padding: 18px 48px;
+            font-size: 1.05rem;
+            font-weight: 700;
             text-decoration: none;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 4px 15px rgba(255, 74, 74, 0.4);
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 6px 25px rgba(255, 71, 87, 0.35);
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .cta-btn:hover {
-            background-color: #e03e3e;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            background-color: var(--accent-hover);
+            box-shadow: 0 8px 30px rgba(255, 71, 87, 0.55);
+        }
+
+        .info-section {
+            max-width: 750px;
+            width: 100%;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 60px;
+            box-sizing: border-box;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            position: relative;
+        }
+
+        .info-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            border-radius: 16px 16px 0 0;
+        }
+
+        .info-section h2 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .info-section ul {
+            padding-left: 0;
+            margin: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-section li {
+            color: var(--muted-text);
+            line-height: 1.6;
+            font-size: 1rem;
+            padding-left: 28px;
+            position: relative;
+        }
+
+        body.rtl .info-section li {
+            padding-left: 0;
+            padding-right: 28px;
+        }
+
+        .info-section li::before {
+            content: "◼";
+            color: var(--accent-color);
+            font-size: 0.75rem;
+            position: absolute;
+            left: 5px;
+            top: 2px;
+            text-shadow: 0 0 8px var(--glow-color);
+        }
+
+        body.rtl .info-section li::before {
+            left: auto;
+            right: 5px;
+        }
+
+        .info-section strong {
+            color: #ffffff;
         }
 
         footer {
+            margin-top: auto;
+            padding: 30px 20px;
+            color: #4b5263;
+            font-size: 0.85rem;
             text-align: center;
-            padding: 40px 20px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid rgba(47, 53, 66, 0.3);
+            width: 100%;
+            max-width: 1000px;
+            box-sizing: border-box;
+            letter-spacing: 0.5px;
         }
 
-        /* Initial display settings handled explicitly via JavaScript */
-        .lang-group {
-            display: none;
+        /* RTL adjustments for Arabic layout */
+        body.rtl {
+            direction: rtl;
+        }
+        body.rtl header {
+            flex-direction: row-reverse;
+        }
+
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 2.6rem; }
+            .hero h1 span { font-size: 2.2rem; }
+            .hero p { font-size: 1.05rem; }
+            header { flex-direction: column; gap: 20px; padding: 20px; }
+            body.rtl header { flex-direction: column; }
+            .lang-switcher { flex-wrap: wrap; justify-content: center; }
+            .info-section { padding: 25px; }
         }
     </style>
 </head>
 <body>
 
     <header>
+        <div class="logo">LoCh <span>ALLIANCE</span></div>
         <div class="lang-switcher">
-            <button class="lang-btn active" onclick="setLanguage('en', event)">English</button>
-            <button class="lang-btn" onclick="setLanguage('zh', event)">繁中</button>
-            <button class="lang-btn" onclick="setLanguage('ko', event)">한국어</button>
-            <button class="lang-btn" onclick="setLanguage('ar', event)">العربية</button>
-        </div>
-        <div class="logo-text">Dark War: Survival</div>
-        
-        <!-- English Header -->
-        <div class="lang-group" data-lang="en">
-            <h1>STATE 632 MIGRATION</h1>
-            <p class="subtitle">Join forces with the warzone's elite tactical vanguard</p>
-        </div>
-        
-        <!-- Traditional Chinese Header -->
-        <div class="lang-group" data-lang="zh">
-            <h1>State 632 移民大廳</h1>
-            <p class="subtitle">與最強戰區精英並肩作戰，主宰戰局</p>
-        </div>
-
-        <!-- Korean Header -->
-        <div class="lang-group" data-lang="ko">
-            <h1>State 632 이주 신청</h1>
-            <p class="subtitle">전장을 지배할 최정예 부대의 일원이 되십시오</p>
-        </div>
-
-        <!-- Arabic Header -->
-        <div class="lang-group" data-lang="ar">
-            <h1>هجرة الولاية 632</h1>
-            <p class="subtitle">انضم إلى القوات النخبة التكتيكية في ساحة المعركة</p>
+            <a id="lang-en" class="active" onclick="switchLanguage('en')">English</a>
+            <a id="lang-zh" onclick="switchLanguage('zh')">繁中</a>
+            <a id="lang-ko" onclick="switchLanguage('ko')">한국어</a>
+            <a id="lang-ar" onclick="switchLanguage('ar')">العربية</a>
         </div>
     </header>
 
-    <div class="container">
-        
-        <!-- ENGLISH SECTION -->
-        <div class="lang-group" data-lang="en">
-            <div class="card">
-                <h2>Why Migrate to State 632?</h2>
-                <p>Welcome to a highly coordinated tactical zone optimized for long-term competition and server health. State 632 features dedicated combat leads focusing on high-tier optimization, strategic battlefield rotation, and massive war rewards.</p>
-                <ul>
-                    <li><strong>Strategic Stability:</strong> Streamlined server rotation rules to eliminate civil friction and protect growing shelters.</li>
-                    <li><strong>Elite Combat Metas:</strong> Coordinated battle lines focusing on fully maximized fighter and shooter troop specializations.</li>
-                    <li><strong>High-Velocity Progression:</strong> Seamlessly structured top-tier rallies designed to maximize your daily resource yields.</li>
-                </ul>
-            </div>
+    <main>
+        <section class="hero">
+            <h1 id="main-title">State 632 <span>Migration Portal</span></h1>
+            <p id="main-desc">Commanders, tactical deployment coordinates are set. Register your power metrics and secure your tier approvals for the official migration window into State 632.</p>
+            <a href="https://google.com" target="_blank" class="cta-btn" id="cta-text">Register Application</a>
+        </section>
 
-            <div class="card">
-                <h2>Warzone Operations Profile</h2>
-                <p>State 632 operates on unified military discipline. We utilize advanced cross-alliance planning, coordinated timing windows, and strict tactical callouts on Discord. If you are an active combatant looking for an aggressive yet orderly home, your drop spot is ready.</p>
-            </div>
+        <section class="info-section">
+            <h2 id="list-title">⚠️ Critical Pre-Flight Checklist</h2>
+            <ul id="list-items">
+                <li><strong>Headquarters Level:</strong> Must be level 21 or higher.</li>
+                <li><strong>Queue State:</strong> All march queues, building queues, and tech queues must be entirely idle.</li>
+                <li><strong>Passports Required:</strong> Ensure you possess the necessary volume of Migration Passes relative to your Combat Power ranking.</li>
+                <li><strong>Leadership:</strong> You cannot be the active Supreme Commander/State President at the moment of migration.</li>
+            </ul>
+        </section>
+    </main>
 
-            <div class="card">
-                <h2>Migration Entry Criteria</h2>
-                <ul>
-                    <li>Active daily attendance during crucial state mobilization windows.</li>
-                    <li>Ability to join or follow tactical tracking networks and Discord directives.</li>
-                    <li>Open to growth-focused commanders ready to deploy high-tier assets efficiently.</li>
-                </ul>
-                <a href="https://discord.gg" class="cta-btn" target="_blank">Apply for Migration</a>
-            </div>
-        </div>
+    <footer id="footer-text">
+        &copy; 2026 LoCh Alliance. For internal tactical deployment only. Powered by Dark War: Survival communities.
+    </footer>
 
-        <!-- TRADITIONAL CHINESE SECTION -->
-        <div class="lang-group" data-lang="zh">
-            <div class="card">
-                <h2>為什麼選擇移民 State 632？</h2>
-                <p>歡迎來到專為長期競爭力與健康生態打造的高效戰術特區。State 632 擁有頂尖的戰事指揮、透明的資源輪替規範，以及最大化的跨服戰役獎勵分配。</p>
-                <ul>
-                    <li><strong>戰略穩定性：</strong> 明確的內部協定，全面杜絕無意義內耗，全力保護發育期避難所。</li>
-                    <li><strong>精英兵種編隊：</strong> 專注於極致化戰士與射手流派，提供最精準的時間差集結與戰術推進。</li>
-                    <li><strong>高效發育進度：</strong> 每日定時對接高階巨獸與活動集結，助你輕鬆實現資源最大化。</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h2>戰區核心方針</h2>
-                <p>State 632 秉持高度紀律。我們擁有跨聯盟聯合作戰編制、精準的時間管理，以及完善的 Discord 戰術群組。如果你是在尋找一個強大且秩序井然的歸宿，這裡就是你的終點站。</p>
-            </div>
-
-            <div class="card">
-                <h2>移民限制與規範</h2>
-                <ul>
-                    <li>每日能於關鍵戰略動員期間保持線上活躍。</li>
-                    <li>願意配合加入戰術追蹤管理並遵循語音指揮。</li>
-                    <li>歡迎所有希望穩定提升兵力與科技的各階指揮官。</li>
-                </ul>
-                <a href="https://discord.gg" class="cta-btn" target="_blank">提交移民申請單</a>
-            </div>
-        </div>
-
-        <!-- KOREAN SECTION -->
-        <div class="lang-group" data-lang="ko">
-            <div class="card">
-                <h2>왜 State 632로 이주해야 하는가?</h2>
-                <p>장기적인 경쟁력과 전장 성장에 최적화된 고도로 조율된 전술 구역에 오신 것을 환영합니다. State 632는 최고 수준의 최적화, 전략적인 공방 교대 및 압도적인 전쟁 보상을 제공합니다.</p>
-                <ul>
-                    <li><strong>전략적 안정성:</strong> 불필요한 분쟁을 배제하고 성장 중인 대피소를 보호하기 위한 조율된 서버 규칙 적용.</li>
-                    <li><strong>정예 전투 메타:</strong> 극대화된 파이터 및 슈터 특성화를 중심으로 구성된 조직적인 전투 연맹 구조.</li>
-                    <li><strong>고속 성장 프로세스:</strong> 일일 자원 획득을 한계치까지 끌어올리기 위해 체계화된 고레벨 연합 랠리 운영.</li>
-                </ul>
-            </div>
-
-            <div class="card">
+    <script>
+        const translations = {
+            en: {
+                title: 'State 632 <span>Migration Portal</span>',
+                desc: 'Commanders, tactical deployment coordinates are set. Register your power metrics and secure your tier approvals for the official migration window into State 632.',
+                cta: 'Register Application',
+                listTitle: '⚠️ Critical Pre-Flight Checklist',
+                items: [
+                    '<strong>Headquarters Level:</strong> Must be level 21 or higher.',
+                    '<strong>Queue State:</strong> All march queues, building queues, and tech queues must be entirely idle.',
+                    '<strong>Passports Required:</strong> Ensure you possess the necessary volume of Migration Passes relative to your Combat Power ranking.',
+                    '<strong>Leadership:</strong> You cannot be the active Supreme Commander/State President at the moment of migration.'
+                ],
+                footer: '&copy; 2026 LoCh Alliance. For internal tactical deployment only. Powered by Dark War: Survival communities.'
+            },
+            zh: {
